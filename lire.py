@@ -6,4 +6,4 @@ with open("notes.csv", encoding="utf-8") as fichier:
         champs = ligne.strip().split(",")
         total += int(champs[2])
         nombre += 1
-print(total / nombre)
+print(f"Moyenne générale: {total/nombre :.2f}")
