@@ -28,7 +28,7 @@ def moyennes(eleves):
         resultat[nom] = totaux[nom]/compteurs[nom]
     return resultat        
 if __name__ == "__main__":
-    eleves, ignorees = lire_notes("invalid.csv")
+    eleves, ignorees = lire_notes("notes.csv")
     print(moyennes(eleves))
     if ignorees>0:
         print(f"Attention: {ignorees} ligne(s) ignorée(s)")
