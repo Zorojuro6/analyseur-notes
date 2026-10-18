@@ -1,4 +1,4 @@
-from analyse import moyennes 
+from analyse import moyennes, lire_notes
 
 def test_moyennes():
     eleves = [
@@ -10,3 +10,8 @@ def test_moyennes():
 
 def test_moyennes_liste_vide():
     assert moyennes([]) == {}
+
+def test_lire_notes_ignore_les_lignes_invalides():
+    eleves, ignorees = lire_notes("invalid.csv")
+    assert len(eleves) == 2
+    assert ignorees == 1

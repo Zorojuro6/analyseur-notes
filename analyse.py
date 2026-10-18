@@ -1,5 +1,6 @@
 def lire_notes(chemin):
     eleves = []
+    ignorees = 0
     with open(chemin, encoding="utf-8") as fichier:
         next(fichier)
         for ligne in fichier:
@@ -7,9 +8,10 @@ def lire_notes(chemin):
             try:
                 note = int(champs[2])
             except ValueError:
+                ignorees += 1
                 continue
             eleves.append({"nom": champs[0], "matiere": champs[1], "note": note})
-    return eleves
+    return eleves, ignorees
 
 def moyennes(eleves):
     totaux = {}
@@ -26,6 +28,10 @@ def moyennes(eleves):
         resultat[nom] = totaux[nom]/compteurs[nom]
     return resultat        
 if __name__ == "__main__":
-    print(lire_notes("notes.csv"))                
+    eleves, ignorees = lire_notes("invalid.csv")
+    print(moyennes(eleves))
+    if ignorees>0:
+        print(f"Attention: {ignorees} ligne(s) ignorée(s)")
+                    
             
     
