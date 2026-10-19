@@ -1,3 +1,4 @@
+import argparse
 def lire_notes(chemin):
     eleves = []
     ignorees = 0
@@ -27,11 +28,19 @@ def moyennes(eleves):
     for nom in totaux:
         resultat[nom] = totaux[nom]/compteurs[nom]
     return resultat        
-if __name__ == "__main__":
-    eleves, ignorees = lire_notes("notes.csv")
-    print(moyennes(eleves))
+
+def main():
+    parser = argparse.ArgumentParser(description="Analyse un fichier de notes CSV")
+    parser.add_argument("--fichier", default="notes.csv", help="fichier CSV à analyser")
+    args= parser.parse_args()
+
+    eleves, ignorees = lire_notes(args.fichier)
+    for nom, moyenne in moyennes(eleves).items():
+       print(f"{nom} : {moyenne:.2f}")
     if ignorees>0:
-        print(f"Attention: {ignorees} ligne(s) ignorée(s)")
-                    
+        print(f"Attention:{ignorees} ligne(s) ignorée(s)")
+        
+if __name__=="__main__":
+    main()  
             
     
