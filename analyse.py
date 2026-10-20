@@ -34,13 +34,18 @@ def main():
     parser.add_argument("--fichier", default="notes.csv", help="fichier CSV à analyser")
     args= parser.parse_args()
 
-    eleves, ignorees = lire_notes(args.fichier)
+    try:
+        eleves, ignorees = lire_notes(args.fichier)
+    except FileNotFoundError:
+        parser.error(f"fichier introuvable: {args.fichier}")
+    
     for nom, moyenne in moyennes(eleves).items():
        print(f"{nom} : {moyenne:.2f}")
     if ignorees>0:
-        print(f"Attention:{ignorees} ligne(s) ignorée(s)")
+        print(f"Attention: {ignorees} ligne(s) ignorée(s)")
         
 if __name__=="__main__":
-    main()  
+    main()
+   
             
     
