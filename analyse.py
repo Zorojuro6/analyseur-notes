@@ -14,11 +14,11 @@ def lire_notes(chemin):
             eleves.append({"nom": champs[0], "matiere": champs[1], "note": note})
     return eleves, ignorees
 
-def moyennes(eleves):
+def moyennes(eleves, cle="nom"):
     totaux = {}
     compteurs = {}
     for ligne in eleves:
-        nom = ligne["nom"]
+        nom = ligne[cle]
         if nom not in totaux:
             totaux[nom] = 0
             compteurs[nom] = 0
