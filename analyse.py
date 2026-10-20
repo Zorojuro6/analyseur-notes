@@ -32,6 +32,7 @@ def moyennes(eleves, cle="nom"):
 def main():
     parser = argparse.ArgumentParser(description="Analyse un fichier de notes CSV")
     parser.add_argument("--fichier", default="notes.csv", help="fichier CSV à analyser")
+    parser.add_argument("--par", choices=["nom","matiere"], default="nom", help="regrouper les moyennes par élève (nom) ou par matière")
     args= parser.parse_args()
 
     try:
@@ -39,8 +40,8 @@ def main():
     except FileNotFoundError:
         parser.error(f"fichier introuvable: {args.fichier}")
     
-    for nom, moyenne in moyennes(eleves).items():
-       print(f"{nom} : {moyenne:.2f}")
+    for groupe, moyenne in moyennes(eleves, args.par).items():
+       print(f"{groupe}: {moyenne:.2f}")
     if ignorees>0:
         print(f"Attention: {ignorees} ligne(s) ignorée(s)")
         
