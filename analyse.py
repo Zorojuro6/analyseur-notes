@@ -42,9 +42,29 @@ def main():
     
     for groupe, moyenne in moyennes(eleves, args.par).items():
        print(f"{groupe}: {moyenne:.2f}")
+
+    meilleure = meilleure_note(eleves)
+    pire = pire_note(eleves)
+    if meilleure is not None:
+        print(f"Meilleure note : {meilleure['note']} ({meilleure['nom']}, {meilleure['matiere']})")
+        print(f"Pire note : {pire['note']} ({pire['nom']}, {pire['matiere']})")
     if ignorees>0:
         print(f"Attention: {ignorees} ligne(s) ignorée(s)")
-        
+
+def meilleure_note(eleves):
+    meilleure = None
+    for ligne in eleves:
+        if meilleure is None or ligne["note"] > meilleure["note"]:
+            meilleure = ligne
+    return meilleure
+
+def pire_note(eleves):
+    pire = None
+    for ligne in eleves:
+        if pire is None or ligne["note"] < pire["note"]:
+            pire = ligne
+    return pire
+              
 if __name__=="__main__":
     main()
    

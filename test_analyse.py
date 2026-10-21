@@ -1,4 +1,4 @@
-from analyse import moyennes, lire_notes
+from analyse import moyennes, lire_notes, meilleure_note, pire_note
 
 def test_moyennes():
     eleves = [
@@ -24,3 +24,20 @@ def test_moyennes_par_matiere():
     ]
     assert moyennes(eleves, "matiere") == {"Maths": 12, "Info": 18}
     
+def test_meilleure_note_avec_notes_negatives():
+    eleves = [
+        {"nom": "Ana", "matiere": "Maths", "note": -3},
+        {"nom":"Leo", "matiere":"Maths", "note": -5},
+    ]
+    assert meilleure_note(eleves)["nom"]=="Ana"
+
+def test_pire_note_avec_notes_negatives():
+    eleves = [
+        {"nom": "Ana", "matiere": "Maths", "note":-3},
+        {"nom":"Leo", "matiere":"Maths", "note": -5},
+    ]
+    assert pire_note(eleves)["nom"] == "Leo"
+
+def test_notes_liste_vide():
+    assert meilleure_note([]) is None
+    assert pire_note([]) is None
